@@ -37,3 +37,5 @@ node_modules
 .tmp
 
 *.iml
+src/**/*.js
+.build/
