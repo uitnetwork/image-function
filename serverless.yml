@@ -1,11 +1,13 @@
 service: image-function
 
+custom: ${file(./gcp-config.yml)}
+
 provider:
   name: google
   runtime: nodejs
-  project: my-project
+  project: ${self:custom.gcp.project}
   # the path to the credentials file needs to be absolute
-  credentials: ~/.gcloud/keyfile.json
+  credentials: ${self:custom.gcp.credentials}
 
 plugins:
   - serverless-google-cloudfunctions
