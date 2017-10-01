@@ -1,3 +1,6 @@
 {
-  "extends": "tslint-config-olo"
+  "extends": "tslint-config-olo",
+  "rules": {
+    "no-console": false
+  }
 }
