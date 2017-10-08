@@ -27,6 +27,14 @@ functions:
     events:
       - http: path
 
+  image:
+    handler: image
+    events:
+      - event:
+          eventType: providers/cloud.storage/eventTypes/object.change
+          resource: projects/${self:custom.gcp.project}/buckets/${self:custom.gcp.imageStorage}
+
+
   # NOTE: the following uses an "event" event (pubSub event in this case).
   # Please create the corresponding resources in the Google Cloud
   # before deploying this service through Serverless

@@ -1,3 +1,4 @@
 gcp:
   project: <google project>
   credentials: <google credentials>
+  imageStorage: <google storage>
