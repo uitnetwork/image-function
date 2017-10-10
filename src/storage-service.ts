@@ -2,9 +2,9 @@ import * as Storage from '@google-cloud/storage';
 import { FileService } from './file-service';
 
 export class StorageService {
-    googleStorage = Storage();
 
-    fileService = new FileService();
+    constructor(private googleStorage: Storage, private fileService: FileService) {
+    }
 
     downloadFile(bucket: string, name: string): Promise<string> {
         console.log('Downloading file: %s from bucket: %s', name, bucket);

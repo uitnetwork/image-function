@@ -1,15 +1,12 @@
 import { StorageService } from './storage-service';
-import * as gm from 'gm';
 import { FileService } from './file-service';
 
 export class ImageService {
     static readonly RESIZED_SUFFIX = '_resized';
 
-    private imageMagick = gm.subClass({imageMagick: true});
-
-    private storageService = new StorageService();
-
-    private fileService = new FileService();
+    // TODO DI framework
+    constructor(private imageMagick: any, private storageService: StorageService, private fileService: FileService) {
+    }
 
     isResizedImage(name: string): boolean {
         if (name.includes(ImageService.RESIZED_SUFFIX)) {
@@ -18,15 +15,14 @@ export class ImageService {
         return false;
     }
 
-    resizeImage(bucket: string, name: string) {
+    resizeImage(bucket: string, name: string): Promise<string> {
         if (this.isResizedImage(name)) {
-            console.log(`${name} is already resized. Ignore.`);
-            return;
+            return Promise.resolve(`${name} is already resized. Ignore.`);
         }
 
         let resizedImageName = this.fileService.addSuffix(name, ImageService.RESIZED_SUFFIX);
 
-        let fileReadStream = this.storageService
+        let result = this.storageService
             .downloadFile(bucket, name)
             .then(downloadFilePath => {
                 return this.doResize(downloadFilePath);
@@ -34,13 +30,19 @@ export class ImageService {
             .then(resizedFilePath => {
                 return this.storageService.uploadFile(resizedFilePath, bucket, resizedImageName);
             })
-            .then(success => console.info(`${name} was successfully resized to ${resizedImageName}.`))
+            .then(success => {
+                return `${name} was successfully resized to ${resizedImageName}.`;
+            })
             .catch(err => {
-                console.error(`Error processing: ${name} from bucket: ${bucket}`, err);
+                return err;
             });
+
+        return result;
     }
 
     private doResize(filePath: string): Promise<string> {
+        console.log(`Resizing file: ${filePath}`);
+
         let promiseResolve, promiseReject;
         let promise = new Promise<string>((resolve, reject) => {
             promiseResolve = resolve;

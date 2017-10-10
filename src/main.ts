@@ -2,9 +2,17 @@
 import { Request, Response } from 'express';
 import { StorageEvent } from './storage-event';
 import { ImageService } from './image-service';
+import { FileService } from './file-service';
+import * as Storage from '@google-cloud/storage';
+import { StorageService } from './storage-service';
+import * as gm from 'gm';
 
 // TODO: inject service
-let imageService = new ImageService();
+let googleStorage: any = Storage();
+let fileService: FileService = new FileService();
+let storageService: StorageService = new StorageService(googleStorage, fileService);
+let imageMagick = gm.subClass({imageMagick: true});
+let imageService = new ImageService(imageMagick, storageService, fileService);
 
 export function http(request: Request, response: Response) {
     switch (request.method) {
@@ -59,8 +67,16 @@ export function image(storageEvent: StorageEvent, callback) {
         return;
     }
 
-    imageService.resizeImage(bucket, name);
-    callback();
+    // TODO track log by id
+    imageService.resizeImage(bucket, name)
+        .then((message) => {
+            console.log(`SUCCESS with message: ${message}`);
+            callback();
+        })
+        .catch((err) => {
+            console.error('Error:', err);
+            callback();
+        });
 }
 
 let SUPPORTED_IMAGES = {
