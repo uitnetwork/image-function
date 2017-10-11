@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "tslint \"src/**/*.ts\"",
     "watchTest": "dos2unix node_modules/tsc-watch/tsc-watch.js && tsc-watch --onSuccess 'npm run test'",
-    "test": "jasmine \".build/src/*spec.js\""
+    "test": "jasmine-ts \"src/**/*.spec.ts\""
   },
   "author": "serverless.com",
   "license": "MIT",
