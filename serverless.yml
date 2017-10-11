@@ -18,6 +18,8 @@ plugins:
 package:
   exclude:
     - node_modules/**
+    - tmp/**
+    - src/*.spec.js
     - .gitignore
     - .git/**
 
