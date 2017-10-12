@@ -34,7 +34,7 @@ export class ImageService {
                 return `${name} was successfully resized to ${resizedImageName}.`;
             })
             .catch(err => {
-                return err;
+                return Promise.reject(err);
             });
 
         return result;
