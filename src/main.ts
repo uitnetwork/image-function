@@ -7,7 +7,7 @@ import * as Storage from '@google-cloud/storage';
 import { StorageService } from './storage-service';
 import * as gm from 'gm';
 
-// TODO: inject service
+// TODO: inject service (eg: Awilix)
 let googleStorage: any = Storage();
 let fileService: FileService = new FileService();
 let storageService: StorageService = new StorageService(googleStorage, fileService);

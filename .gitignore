@@ -39,3 +39,5 @@ node_modules
 *.iml
 src/**/*.js
 .build/
+.nyc_output/
+
