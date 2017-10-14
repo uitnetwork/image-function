@@ -40,6 +40,7 @@ export class ImageService {
         return result;
     }
 
+    // TODO move this logic to its own class
     private doResize(filePath: string): Promise<string> {
         console.log(`Resizing file: ${filePath}`);
 
