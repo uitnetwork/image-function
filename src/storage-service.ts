@@ -18,7 +18,7 @@ export class StorageService {
                 return downloadFilePath;
             })
             .catch(err => {
-                return err;
+                return Promise.reject(err);
             });
 
         return result;
@@ -30,7 +30,7 @@ export class StorageService {
         let result = this.googleStorage.bucket(bucket)
             .upload(localFilePath, {destination: name})
             .then(() => {
-                return Promise.resolve('success');
+                return 'success';
             })
             .catch(err => {
                 return Promise.reject(err);

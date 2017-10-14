@@ -30,6 +30,7 @@
     "tsc-watch": "^1.0.8",
     "tslint": "^5.7.0",
     "tslint-config-olo": "^0.1.0",
+    "typemoq": "^2.0.1",
     "typescript": "^2.5.3",
     "webpack": "^3.6.0"
   }
