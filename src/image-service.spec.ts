@@ -3,7 +3,6 @@ import { instance, mock, verify, when } from 'ts-mockito';
 import { StorageService } from './storage-service';
 import { FileService } from './file-service';
 
-
 describe('ImageService', () => {
 
     describe('isResizedImage', () => {
@@ -138,7 +137,7 @@ describe('ImageService', () => {
     });
 });
 
-let imageMagickFun = jasmine.createSpy('imageMagickFun').and.callFake
+let imageMagickFun = jasmine.createSpy('imageMagickFun').and.callFake;
 
 class MockImageMagick {
     errorMessage: any = undefined;

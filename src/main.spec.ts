@@ -52,7 +52,6 @@ describe('Main', () => {
         let storageData: StorageData;
         let storageEvent: StorageEvent;
 
-
         beforeEach(() => {
             storageData = mock(StorageData);
             storageEvent = new StorageEvent(testEventId, testTimestamp, testEventType, testResource, instance(storageData));

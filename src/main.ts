@@ -56,7 +56,7 @@ export function image(storageEvent: StorageEvent, callback) {
     let resourceState = storageEvent.data.resourceState;
 
     if (resourceState === 'not_exists') {
-        console.info(`Resource: ${name} is removed from bucket: ${bucket}. Do nothing.`)
+        console.info(`Resource: ${name} is removed from bucket: ${bucket}. Do nothing.`);
         callback();
         return;
     }

@@ -12,7 +12,7 @@ describe('StorageService', () => {
     let file: Storage.File = mock(Storage.File);
     let fileService: FileService = mock(FileService);
     let testErrorReason = 'test-error-reason';
-    let testLocalFilePath = '/tmp/testLocalFilePath.jpg'
+    let testLocalFilePath = '/tmp/testLocalFilePath.jpg';
 
     let storageService: StorageService;
 
